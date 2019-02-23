@@ -1,0 +1,24 @@
+{
+  "name": "scene-store-react-example",
+  "homepage": "https://pszujewski.github.io/scene-store-react",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.13.6",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^1.1.4",
+    "redux": "^4.0.1",
+    "scene-store-react": "file:.."
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
