@@ -13,20 +13,20 @@ const getProps = (initialState = { counter: 0 }) => ({
   },
 });
 
-const ExampleStateStore1 = props => {
-  return (
-    <StateStore reducer={props.reducer}>
-      {stateStore => {
-        store = stateStore;
-        return <div id="example-child">Hello StateStore</div>
-      }}  
-    </StateStore>
-  );
-};
-
 describe("<StateStore />", () => {
   it("Should accept a function for the children prop", () => {
-    let store = {}; 
+    let store = {};
+    
+    const ExampleStateStore1 = props => {
+      return (
+        <StateStore reducer={props.reducer}>
+          {stateStore => {
+            store = stateStore;
+            return <div id="example-child">Hello StateStore</div>
+          }}  
+        </StateStore>
+      );
+    };
 
     const setup = new ComponentTestSetup(ExampleStateStore1);
     const { getByText } = setup.renderForTest(getProps());
