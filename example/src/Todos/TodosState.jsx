@@ -24,7 +24,7 @@ export default class TodosState extends React.Component {
       case "ADD_TODO":
         return {
           ...state,
-          todos: [...state.todos, { name: "ITEM" }],
+          todos: [...state.todos, { name: action.payload }],
         };
       default:
         return state;

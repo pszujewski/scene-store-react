@@ -2,6 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { StoreConnect } from "scene-store-react";
 import { Button } from 'antd';
+import { Formik, Form, Field } from 'formik';
+
+/**
+ * This component uses three different Contexts:
+ * - Global: Redux
+ * - intermediate scene state: scene-store-react
+ * - Form state: Formik
+ */
 
 class TodoList extends React.Component {
   render() {
@@ -13,16 +21,35 @@ class TodoList extends React.Component {
           return (
             <div id="todo-list">
               {user && <h3>{`Hi ${user.name}, would you like to add todo list items?`}</h3>}
-              <div style={{ paddingBottom: "1rem" }}>
-                <Button
-                  type="primary"
-                  onClick={this.addTodo(todoProps)}>
-                  Add todo item
-                </Button>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <ul>
+                  {todos.map((t, i) => <li key={i}>{t.name}</li>)}
+                </ul>
+                <div>
+                  <Formik
+                    initialValues={{ todoName: "TODO" }}
+                    onSubmit={values => {
+                      todoProps.sendAction({
+                        type: "ADD_TODO",
+                        payload: values.todoName,
+                      });
+                    }}>
+                    {() => {
+                      return (
+                        <Form>
+                          <Field name="todoName" />
+                          <Button
+                            style={{ marginBottom: "1rem" }}
+                            htmlType="submit"
+                            type="primary">
+                            Add todo item
+                          </Button>
+                        </Form>
+                      );
+                    }}
+                  </Formik>
               </div>
-              <ul>
-                {todos.map((t, i) => <li key={i}>{t.name}</li>)}
-              </ul>
+              </div>
             </div>
           );
         }}
@@ -32,10 +59,6 @@ class TodoList extends React.Component {
 
   mapState = state => {
     return { todos: state.todos };
-  }
-
-  addTodo = todoProps => () => {
-    todoProps.sendAction({ type: "ADD_TODO" });
   }
 }
 
