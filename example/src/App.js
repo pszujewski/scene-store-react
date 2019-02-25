@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Redirect,
 } from "react-router-dom";
 
 import Todos from "./Todos";
@@ -16,7 +17,7 @@ import { Layout } from "antd";
 import { addUser } from "./reducer";
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <Router>
         <div id="App-example">
@@ -26,22 +27,25 @@ class App extends Component {
               <Switch>
                 <Route exact path="/todos" component={Todos} />
                 <Route exact path="/counter" component={Counter} />
+                <Redirect to="/todos" />
               </Switch>
             </SceneContainer>
           </Layout>
         </div>
       </Router>
-    )
+    );
   }
 
   componentDidMount() {
     if (!this.props.user) {
-      this.props.dispatch(addUser({
-        id: "1",
-        name: "Peter",
-        lives: "Michigan",
-        from: "Chicago",
-      }));
+      this.props.dispatch(
+        addUser({
+          id: "1",
+          name: "John Doe",
+          lives: "Michigan",
+          from: "Chicago",
+        })
+      );
     }
   }
 }

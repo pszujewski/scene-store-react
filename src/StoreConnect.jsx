@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StateStoreConsumer } from "./connect";
+import { StateStoreConsumer } from "./context";
 import { isFunc } from "./utils";
 
 export class StoreConnect extends React.Component {

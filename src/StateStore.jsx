@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StateStoreProvider } from "./connect";
+import { StateStoreProvider } from "./context";
 import { isFunc } from "./utils";
 
 export class StateStore extends React.Component {
@@ -33,12 +33,12 @@ export class StateStore extends React.Component {
 
   updateState = action => {
     this.setState(state => this.internalReducer(state, action));
-  }
+  };
 
   internalReducer = (state, action) => {
     if (action.type === "RESET_LOCAL_STATE") {
       return this.props.reduer(undefined, { type: "@INIT@" });
     }
     return this.props.reducer(state, action);
-  }
+  };
 }
