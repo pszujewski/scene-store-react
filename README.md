@@ -82,7 +82,7 @@ Bring it all together
 
 ```jsx
 import React from "react";
-import CounterState from "./CouterState";
+import CounterState from "./CounterState";
 import CounterController from "./CounterController";
 
 export default class CounterPage extends React.Component {
