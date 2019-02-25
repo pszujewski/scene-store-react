@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { StoreConnect } from "scene-store-react";
-import { Button } from 'antd';
+import { Button } from "antd";
 
 class CounterController extends React.Component {
   render() {
@@ -12,10 +12,27 @@ class CounterController extends React.Component {
           const s = counterStore.getState();
           return (
             <div className="counter-controller">
-              {user && <h3>{`${user.name}, you control the counter!`}</h3>}
-              <Button type="primary" onClick={this.increment(counterStore)}>Increment</Button>
-              <Button type="danger" onClick={this.decrement(counterStore)}>Decrement</Button>
+              {user && (
+                <h3>{`${
+                  user.name
+                }, you control the counter! (name comes from redux)`}</h3>
+              )}
+              <Button
+                type="primary"
+                style={{ marginRight: "1rem" }}
+                onClick={this.increment(counterStore)}>
+                Increment
+              </Button>
+              <Button
+                type="danger"
+                style={{ marginLeft: "1rem" }}
+                onClick={this.decrement(counterStore)}>
+                Decrement
+              </Button>
               <div style={{ paddingTop: "1rem" }}>
+                <p style={{ fontWeight: "bold" }}>
+                  This is local state managed by state-scene-react
+                </p>
                 <p style={{ fontWeight: "bold" }}>{`Counter: ${s.counter}`}</p>
                 <p>{`Total presses: ${s.totalPresses}`}</p>
               </div>

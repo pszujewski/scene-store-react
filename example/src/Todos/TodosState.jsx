@@ -8,14 +8,12 @@ export default class TodosState extends React.Component {
   };
 
   initialState = {
-    todos: [],
+    todos: [{ name: "First todo item" }],
   };
 
   render() {
     return (
-      <StateStore reducer={this.reducer}>
-        {this.props.children}
-      </StateStore>
+      <StateStore reducer={this.reducer}>{this.props.children}</StateStore>
     );
   }
 

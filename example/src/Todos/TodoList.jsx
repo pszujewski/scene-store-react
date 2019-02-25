@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { StoreConnect } from "scene-store-react";
-import { Button } from 'antd';
-import { Formik, Form, Field } from 'formik';
+import { Button } from "antd";
+import { Formik, Form, Field } from "formik";
 
 /**
  * This component uses three different Contexts:
@@ -20,10 +20,19 @@ class TodoList extends React.Component {
           const { todos } = todoProps;
           return (
             <div id="todo-list">
-              {user && <h3>{`Hi ${user.name}, would you like to add todo list items?`}</h3>}
+              {user && (
+                <h3>{`Hi ${
+                  user.name
+                }, would you like to add todo list items? (name from redux)`}</h3>
+              )}
               <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <p style={{ fontWeight: "bold" }}>
+                  This is local state managed by state-scene-react
+                </p>
                 <ul>
-                  {todos.map((t, i) => <li key={i}>{t.name}</li>)}
+                  {todos.map((t, i) => (
+                    <li key={i}>{t.name}</li>
+                  ))}
                 </ul>
                 <div>
                   <Formik
@@ -39,7 +48,7 @@ class TodoList extends React.Component {
                         <Form>
                           <Field name="todoName" />
                           <Button
-                            style={{ marginBottom: "1rem" }}
+                            style={{ marginBottom: "1rem", marginLeft: "1rem" }}
                             htmlType="submit"
                             type="primary">
                             Add todo item
@@ -48,7 +57,7 @@ class TodoList extends React.Component {
                       );
                     }}
                   </Formik>
-              </div>
+                </div>
               </div>
             </div>
           );
@@ -59,7 +68,7 @@ class TodoList extends React.Component {
 
   mapState = state => {
     return { todos: state.todos };
-  }
+  };
 }
 
 export default connect(s => ({ user: s.user }))(TodoList);
