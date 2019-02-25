@@ -37,7 +37,7 @@ export class StateStore extends React.Component {
 
   internalReducer = (state, action) => {
     if (action.type === "RESET_LOCAL_STATE") {
-      return this.props.reduer(undefined, { type: "@INIT@" });
+      return this.props.reducer(undefined, { type: "@INIT@" });
     }
     return this.props.reducer(state, action);
   };
