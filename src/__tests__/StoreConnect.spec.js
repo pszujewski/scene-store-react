@@ -5,7 +5,7 @@ import { StoreConnect } from "../StoreConnect";
 import { isFunc } from "../utils";
 
 const ExampleStoreConnect = props => {
-  const reducer = (state = { counter: 0 }, action) => {
+  const reducer = (state = { counter: 1 }, action) => {
     switch (action.type) {
       case "INCREMENT_COUNTER":
         return { counter: state.counter + 1 };
@@ -36,8 +36,8 @@ describe("<StoreConnect />", () => {
     const setup = new ComponentTestSetup(ExampleStoreConnect);
     setup.renderForTest(props);
 
-    expect(typeof store.getState === "function").toBe(true);
-    expect(typeof store.sendAction === "function").toBe(true);
+    expect(isFunc(store.getState)).toBe(true);
+    expect(isFunc(store.sendAction)).toBe(true);
   });
 
   it("Should render the given child into the document", () => {
@@ -52,20 +52,19 @@ describe("<StoreConnect />", () => {
   });
 
   it("Should apply mapState func to the store state if given", () => {
-    let stateStoreProps = {};
-
+    // The piece of state required should be directly placed on the props
     const props = {
-      mapState: state => ({ counter: state.counter }),
-      children: stateStoreProps => {
-        stateStoreProps = stateStoreProps;
-        return <div id="example-child">Hello</div>;
+      mapState: state => {
+        return { counter: state.counter };
+      },
+      children: storeProps => {
+        return <div>{`Count: ${storeProps.counter}`}</div>;
       },
     };
 
     const setup = new ComponentTestSetup(ExampleStoreConnect);
-    setup.renderForTest(props);
+    const { getByText } = setup.renderForTest(props);
 
-    expect(stateStoreProps.counter).toBe(0);
-    expect(isFunc(stateStoreProps.sendAction)).toBe(true);
+    expect(getByText("Count: 1")).toBeDefined();
   });
 });
